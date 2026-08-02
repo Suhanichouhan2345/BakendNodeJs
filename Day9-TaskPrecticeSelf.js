@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 
+console.log("==========================Task-1========================");
 const students = [
     { id: 1, name: "Rahul", course: "MERN", city: "Bhopal" },
     { id: 2, name: "Aman", course: "Java", city: "Indore" },
@@ -28,9 +29,6 @@ app.get('/students', (req, res) => {
     res.send(result)
 })
 
-app.listen(2000, () => {
-    console.log("server is onn");
-})
 
 /*
 Questions
@@ -45,3 +43,10 @@ Return Python students from Bhopal.
 Return MERN students from Delhi.
 Return Java students from Indore.
 */
+
+
+
+
+app.listen(2000, () => {
+    console.log("server is onn");
+})
