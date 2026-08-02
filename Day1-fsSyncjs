@@ -1,0 +1,33 @@
+const fs = require('fs');
+
+const writeFile = fs.writeFileSync("Shree.txt","Shree Radhe Radhe ","utf-8");
+console.log("Radhe Radhe :) ");
+
+const append = fs.appendFileSync("shree.txt","\nRadha walabh shree hare vansh :) radhe radhe", "utf-8");
+console.log("shree raam  :) "); // case sensitive nhi h  fileka name main S small ho ya Big ye change kr date h 
+//console.log(append) // undefined
+
+const readdata = fs.readFileSync("Shree.txt","utf-8");
+console.log(readdata);
+
+const rename = fs.renameSync("Shree.txt","Shree Hari.txt");
+console.log('radhe radhe :)');
+
+// check file exist or not
+console.log(fs.existsSync("Shree Hari.txt"));// true
+console.log(fs.existsSync("shree hari.txt")); // true // not case sensitive
+console.log(fs.existsSync("Shree.txt")); // false
+
+
+// create folder 
+//const folderCreate = fs.mkdirSync('Shree');
+console.log("Shree Radhe :) Hari Bol ! Hari Bol :)");
+
+//const removeFolder = fs.rmdirSync('suhani');
+console.log('done');
+
+
+
+//unlinkSync: esshe meri file delete ho jayegi
+const deletFile = fs.unlinkSync('as.js');
+console.log('doneeee');
