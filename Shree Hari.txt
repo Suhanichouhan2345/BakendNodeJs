@@ -1,2 +1,75 @@
 Shree Radhe Radhe 
 Radha walabh shree hare vansh :) radhe radhe
+
+
+
+
+app.get("/product/:id", (req, res) => {
+
+    let id = Number(req.params.id);
+
+    let product = products.find((val) => {
+        return val.id === id;
+    });
+
+    if (product) {
+
+        let discountPrice = product.price - (product.price * 10 / 100);
+
+        res.send({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            discountPrice: discountPrice
+        });
+
+    } else {
+
+        res.send({
+            message: "Product not found"
+        });
+
+    }
+
+});
+
+//=====================================================================================
+
+const express = require("express");
+
+const app = express();
+
+// JSON body read karne ke liye
+app.use(express.json());
+
+app.post("/register", (req, res) => {
+    const { name, email, age } = req.body;
+
+    // Check if any field is missing
+    if (!name || !email || age === undefined) {
+        return res.json({
+            message: "All fields are required"
+        });
+    }
+
+    // Check age
+    if (age < 18) {
+        return res.json({
+            message: "Age must be 18+"
+        });
+    }
+
+    // Success
+    res.json({
+        message: "Registration Successful",
+        user: {
+            name,
+            email,
+            age
+        }
+    });
+});
+
+app.listen(2000, () => {
+    console.log("Server started on port 2000");
+});

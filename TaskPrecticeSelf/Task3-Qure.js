@@ -24,6 +24,8 @@ Department + Salary.
 
 ⚠️ Rule: Ek hi route banana hai.
 */
+
+
 app.get("/employes",(req,res)=>{
 let result = employees.filter((val)=>{
     let salary = req.query.salary;
@@ -47,3 +49,5 @@ res.send(result)
 app.listen(2000,()=>{
     console.log("Server On Donnnneeee Is Khushi Main JAI SHREE RAAM Bolna toh banata h JAI SHREE RAAM :)");
 })
+
+//acha matalab url main se value chaiye toh parama or url ain value dame h or dekhte h toh quare esa kuch  
