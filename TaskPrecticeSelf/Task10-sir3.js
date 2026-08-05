@@ -1,31 +1,35 @@
 const express=require("express");
 const app=express();
 app.use(express.json())
+
 app.post("/register",(req,res)=>{
   // console.log(req.body);
   let name = req.body.name;
   let email = req.body.email;
-  let age = req.body.age
+  let age = Number(req.body.age);
 
-  console.log(name,email,age);
-
-if (!name || !email || req.body.age === undefined) {
+  if(!name || !email || !age){
     return res.send({
-        message: "All fields are required"
-    });
-}
-if (isNaN(age)) {
+       "message":"All fields are required"
+    })
+  }
+  if(age=="age"){
     return res.send({
-        message: "Age must be a number"
-    });
-}
+        "message":"Age must be a number"
+    })
 
-if (age <= 0) {
+  if(age<18){
     return res.send({
-        message: "Age must be greater than 0"
-    });
-}
+        "message":"Age must be 18+"
+    })
+  }
+    if (isNaN(age)) {
+        return res.send({
+            message: "Age must be a valid number"
+        });
+    }
 
+  }
   res.send({
     message: "Registration Successful",
     users:{
