@@ -1,39 +1,40 @@
+const express=require("express");
+const app=express();
+app.use(express.json())
+app.post("/register",(req,res)=>{
+  // console.log(req.body);
+  let name = req.body.name;
+  let email = req.body.email;
+  let age = req.body.age
 
-const express = require("express");
+  console.log(name,email,age);
 
-const app = express();
-
-// JSON body read karne ke liye
-app.use(express.json());
-
-app.post("/register", (req, res) => {
-    const { name, email, age } = req.body;
-
-    // Check if any field is missing
-    if (!name || !email || age === undefined) {
-        return res.json({
-            message: "All fields are required"
-        });
-    }
-
-    // Check age
-    if (age < 18) {
-        return res.json({
-            message: "Age must be 18+"
-        });
-    }
-
-    // Success
-    res.json({
-        message: "Registration Successful",
-        user: {
-            name,
-            email,
-            age
-        }
+if (!name || !email || req.body.age === undefined) {
+    return res.send({
+        message: "All fields are required"
     });
-});
+}
+if (isNaN(age)) {
+    return res.send({
+        message: "Age must be a number"
+    });
+}
 
-app.listen(2000, () => {
-    console.log("Server started on port 2000");
-});
+if (age <= 0) {
+    return res.send({
+        message: "Age must be greater than 0"
+    });
+}
+
+  res.send({
+    message: "Registration Successful",
+    users:{
+      name,email,age
+    }
+  })
+  
+})
+
+app.listen(3000,()=>{
+  console.log("running")
+})
