@@ -98,3 +98,6 @@ return res({
 app.listen(9090,()=>{
     console.log("port on 9090");
 })
+
+
+// current value is the value are commit form the side of valuesfor converstion and through the vales from conversion values form the contry values and through the functions of formulalization form of the throw contribution .
