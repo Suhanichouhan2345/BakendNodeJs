@@ -1,0 +1,31 @@
+GET /products
+→ Return all products.
+
+GET /products/:id
+→ Return product by ID.
+
+If product doesn't exist
+→ Return 404
+→ Message: "Product Not Found"
+
+POST /products
+→ Add a new product.
+→ Status: 201 Created
+
+PATCH /products/:id
+Body:
+{
+    "price": 55000
+}
+
+→ Only price should be updated.
+→ All other fields should remain unchanged.
+
+DELETE /products/:id
+→ Product should be removed from the array.
+
+GET /products?category=Electronics
+→ Return only Electronics products.
+
+GET /products?category=Electronics&city=Bhopal
+→ Return only Electronics products from Bhopal.
