@@ -1,0 +1,195 @@
+const express = require("express");
+
+const app = express();
+
+const PORT = 3000;
+
+app.use(express.json());
+
+let movies = [
+    {
+        id: 1,
+        title: "KGF Chapter 2",
+        language: "Hindi",
+        genre: "Action",
+        rating: 9.3,
+        releaseYear: 2022
+    },
+    {
+        id: 2,
+        title: "3 Idiots",
+        language: "Hindi",
+        genre: "Comedy",
+        rating: 9.5,
+        releaseYear: 2009
+    },
+    {
+        id: 3,
+        title: "Interstellar",
+        language: "English",
+        genre: "Sci-Fi",
+        rating: 9.7,
+        releaseYear: 2014
+    },
+    {
+        id: 4,
+        title: "Pushpa",
+        language: "Telugu",
+        genre: "Action",
+        rating: 8.9,
+        releaseYear: 2021
+    }
+];
+
+
+// 1. GET /allMovies
+
+app.get("/allMovies", (req, res) => {
+    res.send(movies);
+});
+
+
+// 2. GET /movie
+// Query Parameters
+
+app.get("/movie", (req, res) => {
+
+    let result = movies;
+
+    let { language, genre, minRating, releaseYear } = req.query;
+
+    if (language) {
+        result = result.filter((val) => {
+            return val.language === language;
+        });
+    }
+
+    if (genre) {
+        result = result.filter((val) => {
+            return val.genre === genre;
+        });
+    }
+
+    if (minRating) {
+        result = result.filter((val) => {
+            return val.rating >= Number(minRating);
+        });
+    }
+
+    if (releaseYear) {
+        result = result.filter((val) => {
+            return val.releaseYear === Number(releaseYear);
+        });
+    }
+
+    res.send(result);
+});
+
+
+// 3. GET /movie/:id
+
+app.get("/movie/:id", (req, res) => {
+
+    let id = Number(req.params.id);
+
+    let movie = movies.find((val) => {
+        return val.id === id;
+    });
+
+    if (!movie) {
+        return res.status(404).send("Movie not found");
+    }
+
+    res.send(movie);
+});
+
+
+// 4. POST /createMovie
+
+app.post("/createMovie", (req, res) => {
+
+    let newMovie = {
+        id: movies.length + 1,
+        title: req.body.title,
+        language: req.body.language,
+        genre: req.body.genre,
+        rating: req.body.rating,
+        releaseYear: req.body.releaseYear
+    };
+
+    movies.push(newMovie);
+
+    res.send("Movie Added Successfully");
+});
+
+
+// 5. PATCH /updateMovieRating/:id
+
+app.patch("/updateMovieRating/:id", (req, res) => {
+
+    let id = Number(req.params.id);
+
+    let movie = movies.find((val) => {
+        return val.id === id;
+    });
+
+    if (!movie) {
+        return res.status(404).send("Movie not found");
+    }
+
+    movie.rating = req.body.rating;
+
+    res.send("Movie Rating Updated Successfully");
+});
+
+
+// 6. PUT /replaceMovie/:id
+
+app.put("/replaceMovie/:id", (req, res) => {
+
+    let id = Number(req.params.id);
+
+    let index = movies.findIndex((val) => {
+        return val.id === id;
+    });
+
+    if (index === -1) {
+        return res.status(404).send("Movie not found");
+    }
+
+    movies[index] = {
+        id: id,
+        title: req.body.title,
+        language: req.body.language,
+        genre: req.body.genre,
+        rating: req.body.rating,
+        releaseYear: req.body.releaseYear
+    };
+
+    res.send("Movie Updated Successfully");
+});
+
+
+// 7. DELETE /deleteMovie/:id
+
+app.delete("/deleteMovie/:id", (req, res) => {
+
+    let id = Number(req.params.id);
+
+    let index = movies.findIndex((val) => {
+        return val.id === id;
+    });
+
+    if (index === -1) {
+        return res.status(404).send("Movie not found");
+    }
+
+    movies.splice(index, 1);
+
+    res.send("Movie Deleted Successfully");
+});
+
+
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});

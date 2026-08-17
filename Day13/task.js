@@ -36,8 +36,8 @@ const movies = [
         }
     ];
 
-    app.use(express());
-app.get("/movie", (req, res) => {
+    app.use(express.json());
+    app.get("/movie", (req, res) => {
     let language = req.query.language;
     let genre = req.query.genre;
     let rating = req.query.minRating;
