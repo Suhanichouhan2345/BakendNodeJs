@@ -1,0 +1,248 @@
+Problem Statement
+
+Aap ek E-Commerce Platform ke liye backend develop kar rahe hain.
+
+Company chahti hai ki users products dekh saken, filter kar saken aur admin naye products add, update aur delete kar sake.
+
+Aapko Express.js ka use karke ek simple Product Management API develop karni hai.
+
+Note:
+
+Is assignment me database ka use nahi karna hai.
+
+Saara data ek JavaScript Array me store hoga.
+
+let products = [
+  {
+    id: 1,
+    name: "iPhone 15",
+    category: "Mobile",
+    brand: "Apple",
+    price: 70000,
+    rating: 4.6
+  },
+  {
+    id: 2,
+    name: "Galaxy S24",
+    category: "Mobile",
+    brand: "Samsung",
+    price: 65000,
+    rating: 4.5
+  },
+  {
+    id: 3,
+    name: "MacBook Air",
+    category: "Laptop",
+    brand: "Apple",
+    price: 95000,
+    rating: 4.8
+  },
+  {
+    id: 4,
+    name: "Inspiron 15",
+    category: "Laptop",
+    brand: "Dell",
+    price: 60000,
+    rating: 4.2
+  }
+]
+Objective
+
+Return all products.
+
+Example Request
+GET /allProducts
+Expected Response
+
+Return complete products array.
+
+2.
+Objective
+
+Filter products using Query Parameters.
+
+Use only ONE route for all filters.
+
+GET /product
+Supported Query Parameters
+category
+
+Example:
+
+GET /product?category=Mobile
+brand
+
+Example:
+
+GET /product?brand=Apple
+minPrice
+
+Return all products whose price is greater than or equal to the given value.
+
+Example:
+
+GET /product?minPrice=70000
+minRating
+
+Return all products whose rating is greater than or equal to the given value.
+
+Example:
+
+GET /product?minRating=4.5
+Multiple Filters
+
+All filters should work together.
+
+Examples:
+
+GET /product?category=Mobile&brand=Apple
+GET /product?category=Mobile&minPrice=65000
+GET /product?brand=Apple&minRating=4.5
+GET /product?category=Laptop&brand=Apple&minRating=4.5
+
+Important Note
+
+Do NOT create separate routes for every filter.
+
+Incorrect
+GET /productByCategory
+
+
+GET /productByBrand
+
+
+GET /productByPrice
+
+
+GET /productByRating
+Correct
+GET /product
+
+Use Query Parameters.
+
+3.
+GET /product/:id
+Objective
+
+Return details of a particular product.
+
+Use Route Parameters.
+
+Example
+GET /product/3
+Expected Response
+
+Return product having id 3.
+
+4.
+POST /createProduct
+Objective
+
+Add a new product into the products array.
+
+{
+  "name": "OnePlus 12",
+  "category": "Mobile",
+  "brand": "OnePlus",
+  "price": 55000,
+  "rating": 4.4
+}
+Expected Response
+Product Added Successfully
+5.
+PATCH /updateProductPrice/:id
+Objective
+
+Update only the price of a product.
+
+Use Route Parameter to identify the product.
+
+{
+  "price": 62000
+}
+Expected Response
+Product Price Updated Successfully
+6.
+PUT /replaceProduct/:id
+Objective
+
+Replace the complete product object.
+
+{
+  "name": "MacBook Pro",
+  "category": "Laptop",
+  "brand": "Apple",
+  "price": 150000,
+  "rating": 4.9
+}
+Expected Response
+Product Updated Successfully
+7.
+DELETE /deleteProduct/:id
+Objective
+
+Delete a product from the array.
+
+Example
+DELETE /deleteProduct/2
+Expected Response
+Product Deleted Successfully
+Constraints
+
+Students must follow the following rules.
+
+Use only Express.js.
+Do NOT use Database.
+Store data only inside the provided array.
+Use Route Parameters wherever required.
+Use Query Parameters wherever required.
+Do NOT create extra routes.
+Use appropriate HTTP Methods.
+Every API should send a response.
+Testing Scenarios
+
+Test all the following requests.
+
+GET /allProducts
+
+
+GET /product
+
+
+GET /product?category=Mobile
+
+
+GET /product?brand=Apple
+
+
+GET /product?minPrice=70000
+
+
+GET /product?minRating=4.5
+
+
+GET /product?category=Mobile&brand=Apple
+
+
+GET /product?category=Mobile&minPrice=65000
+
+
+GET /product?brand=Apple&minRating=4.5
+
+
+GET /product?category=Laptop&brand=Apple&minRating=4.5
+
+
+GET /product/1
+
+
+POST /createProduct
+
+
+PATCH /updateProductPrice/2
+
+
+PUT /replaceProduct/3
+
+
+DELETE /deleteProduct/4

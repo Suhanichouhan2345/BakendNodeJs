@@ -89,9 +89,7 @@ app.get('/movie/:id',(req,res)=>{
    let id = Number(req.params.id);
    let store = movies.filter((val)=>{
     return val.id === id;
-   })
-  
-
+   })   
    if(store.length==0){
     return res.status(404).json({
         massage : "invalid id"
@@ -134,7 +132,6 @@ app.patch('/updateMovies/:id',(req,res)=>{
 })
 
 // 7. DELETE /deleteMovie/:id
-
 app.delete("/deleteMovie/:id", (req, res) => {
     let id = Number(req.params.id);
     let index = movies.findIndex((val) => {
