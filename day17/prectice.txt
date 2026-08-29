@@ -1,0 +1,135 @@
+🚀 Adventure Question 1 — E-Commerce Product API
+
+Database use nahi karna hai. Saara data JavaScript array me rahega.
+
+let products = [
+  {
+    id: 1,
+    name: "iPhone 15",
+    category: "Mobile",
+    brand: "Apple",
+    price: 70000,
+    rating: 4.6
+  },
+  {
+    id: 2,
+    name: "Galaxy S24",
+    category: "Mobile",
+    brand: "Samsung",
+    price: 65000,
+    rating: 4.5
+  },
+  {
+    id: 3,
+    name: "MacBook Air",
+    category: "Laptop",
+    brand: "Apple",
+    price: 95000,
+    rating: 4.8
+  },
+  {
+    id: 4,
+    name: "Dell Inspiron",
+    category: "Laptop",
+    brand: "Dell",
+    price: 60000,
+    rating: 4.2
+  }
+];
+1️⃣ GET /allProducts
+
+Saare products return karo.
+
+2️⃣ GET /products
+
+Ek hi route use karke filters lagao.
+
+Supported query parameters:
+
+category
+brand
+minPrice
+maxPrice
+minRating
+
+Examples:
+
+GET /products?category=Mobile
+GET /products?brand=Apple
+GET /products?minPrice=60000
+GET /products?maxPrice=70000
+GET /products?minRating=4.5
+Multiple filters bhi work karne chahiye:
+GET /products?category=Mobile&brand=Apple
+GET /products?minPrice=60000&maxPrice=70000
+GET /products?brand=Apple&minRating=4.7
+GET /products?category=Laptop&minPrice=60000&minRating=4.5
+3️⃣ GET /products/:id
+
+ID ke basis par ek product find karo.
+
+GET /products/3
+4️⃣ POST /createProduct
+
+Naya product add karo.
+
+Request body:
+
+{
+  "name": "OnePlus 13",
+  "category": "Mobile",
+  "brand": "OnePlus",
+  "price": 55000,
+  "rating": 4.4
+}
+
+Response:
+
+Product Added Successfully
+5️⃣ PATCH /updateProductPrice/:id
+
+Sirf price update karna hai.
+
+Request:
+
+PATCH /updateProductPrice/2
+
+Body:
+
+{
+  "price": 59999
+}
+
+Response:
+
+Product Price Updated Successfully
+6️⃣ PUT /replaceProduct/:id
+
+Complete product object replace karo.
+
+PUT /replaceProduct/4
+
+Body:
+
+{
+  "name": "Dell XPS",
+  "category": "Laptop",
+  "brand": "Dell",
+  "price": 85000,
+  "rating": 4.7
+}
+
+⚠️ id ko change nahi karna hai.
+
+Response:
+
+Product Updated Successfully
+7️⃣ DELETE /deleteProduct/:id
+
+Product delete karo.
+
+DELETE /deleteProduct/2
+
+Response:
+
+Product Deleted Successfully

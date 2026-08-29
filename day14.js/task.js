@@ -47,6 +47,7 @@ app.get('/allProduct',(req,res)=>{
     })
 })
 
+
 // Task 2) Filter products using Query Parameters.
 app.get('/product',(req,res)=>{
     let price = Number(req.query.price);
@@ -61,26 +62,21 @@ app.get('/product',(req,res)=>{
             return val.price === price;
         })
     }
-
     if(name){
         result = result.filter((val)=>{
             return val.name === name;
         })
-    }
-    
+    } 
     if(rating){
         result = result.filter((val)=>{
             return val.rating === rating;
         })
     }
-
     if(category){
         result = result.filter((val)=>{
             return val.category === category;
         })
-    }
-
-       
+    }    
     return res.status(200).json({
         result
     })
@@ -88,7 +84,6 @@ app.get('/product',(req,res)=>{
 })
 
 // Task3)  GET /product/:id
-
 app.get('/productId/:id',(req,res)=>{
 let id = Number(req.params.id);
 
@@ -107,10 +102,9 @@ return res.status(200).json({
 })
 
 //Task 4) POST /createProduct
-
 app.post('/createProducts',(req,res)=>{
     let newProduct = {
-       // id:products.length+1,
+        id:products.length+1,
         name : req.body.name,
         category : req.body.category,
         brand : req.body.brand,
@@ -123,10 +117,29 @@ app.post('/createProducts',(req,res)=>{
         massage : "Done ...."
     })
 })
+// Task 5) Update Product Price
+app.patch("/updateProductPrice/:id/:price", (req, res) => {
 
+    let id = Number(req.params.id);
+    let price = Number(req.params.price);
 
+    let value = products.find((val) => {
+        return val.id === id;
+    });
 
+    if (!value) {
+        return res.status(404).json({
+            message: "Invalid product id"
+        });
+    }
 
+    value.price = price;
+
+    return res.status(200).json({
+        message: "Price updated successfully",
+        product: value
+    });
+});
 app.listen(5050,()=>{
     console.log("server on at 5050");
 })
